@@ -20,15 +20,15 @@ public class OrderServices : IOrderServices
         _cartRepo = cartRepo;
     }
 
-    public async Task CancelOrderAsync(int orderId, string userId, bool isAdmin)
+    public async Task CancelOrderAsync(int orderId, string userId)
     {
         var order = await _orderRepo.GetByIdAsync(orderId);
 
         if (order == null)
             throw new Exception("Order not found");
 
-        // 👇 هنا بالظبط
-        if (order.UserId != userId && !isAdmin)
+   
+        if (order.UserId != userId)
             throw new Exception("Not allowed");
 
         if (order.Status != OrderStatus.Pending)

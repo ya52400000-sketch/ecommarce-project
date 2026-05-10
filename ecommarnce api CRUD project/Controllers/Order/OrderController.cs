@@ -48,7 +48,7 @@ namespace ecommarnce_api_CRUD_project.Controllers.Order
             return Ok(result);
         }
         [HttpPost("{orderId}/cancel")]
-        [Authorize(Roles = "Admin,User")]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Cancel(int orderId)
         {
             var userId = GetUserId();
