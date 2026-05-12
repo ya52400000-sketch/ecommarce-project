@@ -49,7 +49,7 @@ git clone https://github.com/ya52400000-sketch/ecommarce-project.git
     dotnet run
 ##📍 API Documentation
 After running the project, open:
-https://localhost:7015/swagger/index.html
+https://localhost:44311/swagger/index.html
 
 ## 🔐 Default Accounts 
 Admin:
