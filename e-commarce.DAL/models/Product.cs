@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ecommarce.DAL.models;
 
-public class Product : BaseType<int>
+public class Product : BaseType<Guid>
 {
 
 
@@ -17,7 +17,7 @@ public class Product : BaseType<int>
     public int Stock { get; set; }
 
     public Category Category { get; set; }
-    public int CategoryId { get; set; }
+    public Guid CategoryId { get; set; }
     public ICollection<OrderItem> orderItems { get; set; }
     public ICollection<CartItem> CartItems { get; set; }
 }

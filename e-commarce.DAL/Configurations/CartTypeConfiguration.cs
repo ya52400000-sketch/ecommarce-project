@@ -11,7 +11,7 @@ public class CartTypeConfiguration : IEntityTypeConfiguration<Cart>
     public void Configure(EntityTypeBuilder<Cart> Modelbuilder)
     {
         Modelbuilder.HasKey(c => c.Id);
-        Modelbuilder.Property(c => c.Id).ValueGeneratedNever();
+    
         Modelbuilder.HasMany(c => c.Items)
     .WithOne(i => i.Cart)
     .HasForeignKey(i => i.CartId);

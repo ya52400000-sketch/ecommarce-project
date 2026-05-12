@@ -2,12 +2,12 @@
 
 namespace ecommarce.DAL.models;
 
-public class OrderItem:BaseType<int>
+public class OrderItem:BaseType<Guid>
 {
-    public int OrderId { get; set; }
+    public Guid OrderId { get; set; }
     public Order Order { get; set; }
 
-    public int ProductId { get; set; }
+    public Guid ProductId { get; set; }
     public Product product { get; set; }
 
     public string ProductName { get; set; } 

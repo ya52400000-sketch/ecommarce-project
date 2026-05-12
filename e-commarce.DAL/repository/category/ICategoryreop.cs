@@ -5,5 +5,5 @@ namespace ecommarce.DAL.repository;
 
 public interface ICategoryreop : IGenricRepo<Category>
 {
-    Task SoftDeleteAsync(int id);
+    Task SoftDeleteAsync(Guid id);
 }

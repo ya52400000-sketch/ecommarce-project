@@ -32,7 +32,7 @@ namespace ecommarce.DAL.repository.GenricRepo
            return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(Guid id)
         {
             return await _context.Set<T>().FindAsync(id) ?? null;
         }

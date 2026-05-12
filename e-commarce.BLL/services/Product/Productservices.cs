@@ -19,11 +19,10 @@ public class Productservices : IProductservices
     {
       
 
-        var random = new Random();
 
         var newProduct = new Product
         {
-            Id = random.Next(1, 20),
+  
             Name = product.Name,
             Price = product.Price,
             Stock = product.Stock,
@@ -31,10 +30,11 @@ public class Productservices : IProductservices
         };
 
        await _repo.AddAsync(newProduct);
+        await _repo.SaveChangesAsync();
     }
 
   
-    public async Task Delete(int id)
+    public async Task Delete(Guid id)
     {
         var existing = await _repo.GetByIdAsync(id);
 
@@ -42,6 +42,7 @@ public class Productservices : IProductservices
             throw new Exception("Product not found");
 
         _repo.Delete(existing);
+        await _repo.SaveChangesAsync();
     }
 
    
@@ -60,7 +61,7 @@ public class Productservices : IProductservices
     }
 
 
-    public async Task<ProductGetByIdDto> GetById(int id)
+    public async Task<ProductGetByIdDto> GetById(Guid id)
     {
         var p = await _repo.GetByIdAsync(id);
 
@@ -93,10 +94,8 @@ public class Productservices : IProductservices
 
         if (product.Stock >= 0)
             existing.Stock = product.Stock;
-
-        if (product.CategoryId > 0)
             existing.CategoryId = product.CategoryId;
-
-        _repo.Update(existing);
+       await _repo.Update(existing);
+        await _repo.SaveChangesAsync();
     }
 }

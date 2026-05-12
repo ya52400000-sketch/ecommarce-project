@@ -16,19 +16,21 @@ public class Categoryservices : ICategoryservices
     {
 
 
-        var random = new Random();
+      
         var newcategory = new Category
 
         {
-            Id = random.Next(1,20),
+          
             Name = category.Name,
         };
        await repo.AddAsync(newcategory);
+        await repo.SaveChangesAsync();
     }
 
-    public async Task deletecategory(int id)
+    public async Task deletecategory(Guid id)
     {
       await repo.SoftDeleteAsync(id);
+        await repo.SaveChangesAsync();
     }
 
 
@@ -43,7 +45,7 @@ public class Categoryservices : ICategoryservices
         return categorygetall;
     }
 
-    public async Task<CategoryGetDto> GetAsync(int id)
+    public async Task<CategoryGetDto> GetAsync(Guid id)
     {
         var get_category = await repo.GetByIdAsync(id);
         if (get_category == null)
@@ -63,6 +65,7 @@ public class Categoryservices : ICategoryservices
         {
             existcategory.Name = category.Name;
             repo.Update(existcategory);
+            await repo.SaveChangesAsync();
         }
     }
 }

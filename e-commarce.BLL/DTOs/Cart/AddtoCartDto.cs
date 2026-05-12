@@ -9,7 +9,7 @@ namespace ecommarce.BLL.DTOs;
 
 public class AddtoCartDto
 {
-    public int ProductId { get; set; }
+    public Guid ProductId { get; set; }
     public int Quantity { get; set; }
     public decimal Price { get; set; }
 

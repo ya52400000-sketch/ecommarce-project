@@ -13,6 +13,6 @@ namespace ecommarce.DAL.repository;
 public interface IOrderReop : IGenricRepo<Order>
 {
   IQueryable<Order> GetAllQueryable();
-    Task<Order> GetOrderWithItemsAsync(int id);
+    Task<Order> GetOrderWithItemsAsync(Guid id);
     Task<IEnumerable<Order>> GetUserOrdersWithItemsAsync(string userId);
 }

@@ -20,7 +20,7 @@ public class OrderServices : IOrderServices
         _cartRepo = cartRepo;
     }
 
-    public async Task CancelOrderAsync(int orderId, string userId)
+    public async Task CancelOrderAsync(Guid orderId, string userId)
     {
         var order = await _orderRepo.GetByIdAsync(orderId);
 
@@ -37,9 +37,10 @@ public class OrderServices : IOrderServices
         order.Status = OrderStatus.Cancelled;
 
         await _orderRepo.Update(order);
+        await _orderRepo.SaveChangesAsync();
     }
 
-    public async Task ChangeOrderStatusAsync(int orderId, OrderStatus status)
+    public async Task ChangeOrderStatusAsync(Guid orderId, OrderStatus status)
     {
         var order = await _orderRepo.GetByIdAsync(orderId);
 
@@ -49,9 +50,10 @@ public class OrderServices : IOrderServices
         order.Status = status;
 
         await _orderRepo.Update(order);
+        await _orderRepo.SaveChangesAsync();
     }
 
-    public async Task<int> CreateOrderAsync(string userId)
+    public async Task<Guid> CreateOrderAsync(string userId)
     {
         var cart = await _cartRepo.GetCartWithItemsAsync(userId);
 
@@ -72,6 +74,7 @@ public class OrderServices : IOrderServices
         };
 
         await _orderRepo.AddAsync(order);
+        await _orderRepo.SaveChangesAsync();
 
         await _cartRepo.ClearCartAsync(userId);
 
@@ -108,7 +111,7 @@ public class OrderServices : IOrderServices
             .ToListAsync();
     }
 
-    public async Task<GetOrderDto> GetOrderAsync(int orderId)
+    public async Task<GetOrderDto> GetOrderAsync(Guid orderId)
     {
         var order = await _orderRepo.GetOrderWithItemsAsync(orderId);
 
@@ -131,4 +134,6 @@ public class OrderServices : IOrderServices
             }).ToList()
         };
     }
+
+   
 }

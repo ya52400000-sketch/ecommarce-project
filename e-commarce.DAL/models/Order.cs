@@ -5,7 +5,7 @@ using ecommarce.DAL.eunm;
 
 namespace ecommarce.DAL.models;
 
-public class Order:BaseType<int>
+public class Order:BaseType<Guid>
 {
     public string UserId { get; set; }
     public AppUser User { get; set; }

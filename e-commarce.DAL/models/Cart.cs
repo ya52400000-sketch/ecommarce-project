@@ -2,7 +2,7 @@
 
 namespace ecommarce.DAL.models;
 
-public class Cart:BaseType<int>
+public class Cart:BaseType<Guid>
 {
     public string UserId { get; set; }
 

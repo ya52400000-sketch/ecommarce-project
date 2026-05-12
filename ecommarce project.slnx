@@ -1,5 +1,0 @@
-<Solution>
-  <Project Path="e-commarce.BLL/ecommarce.BLL.csproj" Id="31bda22e-d15a-4e90-a2c0-74b356bf3f96" />
-  <Project Path="e-commarce.DAL/ecommarce.DAL.csproj" Id="2248c16a-7374-4719-a7e1-86d5744a5df6" />
-  <Project Path="ecommarnce api CRUD project/ecommarce.API.csproj" />
-</Solution>

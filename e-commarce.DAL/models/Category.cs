@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ecommarce.DAL.models;
 
-public class Category:BaseType<int>
+public class Category:BaseType<Guid>
 {
     [Required]
     public string Name { get; set; }

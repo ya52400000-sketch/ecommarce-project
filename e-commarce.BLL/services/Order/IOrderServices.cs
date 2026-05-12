@@ -14,12 +14,12 @@ public interface IOrderServices
 {
     Task<IEnumerable<GetAllOrdersDto>> GetAllOrdersAsync(FilterOrderDto filter);
 
-    Task<int> CreateOrderAsync(string userId);
+    Task<Guid> CreateOrderAsync(string userId);
 
-    Task<GetOrderDto> GetOrderAsync(int orderId);
+    Task<GetOrderDto> GetOrderAsync(Guid orderId);
 
-    Task CancelOrderAsync(int orderId, string userId);
+    Task CancelOrderAsync(Guid orderId, string userId);
 
-    Task ChangeOrderStatusAsync(int orderId, OrderStatus status);
+    Task ChangeOrderStatusAsync(Guid orderId, OrderStatus status);
 
 }

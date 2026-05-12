@@ -9,11 +9,11 @@ using ecommarce.DAL.data;
 
 #nullable disable
 
-namespace ecommarnce_api_CRUD_project.Migrations
+namespace e_commarce.DAL.Migrations
 {
     [DbContext(typeof(Appdbcontext))]
-    [Migration("20260503163320_addextracolmstoappuser")]
-    partial class addextracolmstoappuser
+    [Migration("20260511234840_seedAdminAccount")]
+    partial class seedAdminAccount
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -174,7 +174,6 @@ namespace ecommarnce_api_CRUD_project.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -237,8 +236,9 @@ namespace ecommarnce_api_CRUD_project.Migrations
 
             modelBuilder.Entity("ecommarce.DAL.models.Cart", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -260,17 +260,18 @@ namespace ecommarnce_api_CRUD_project.Migrations
 
             modelBuilder.Entity("ecommarce.DAL.models.CartItem", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CartId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -290,8 +291,9 @@ namespace ecommarnce_api_CRUD_project.Migrations
 
             modelBuilder.Entity("ecommarce.DAL.models.Category", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -304,32 +306,13 @@ namespace ecommarnce_api_CRUD_project.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsDeleted = false,
-                            Name = "Electronics"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsDeleted = false,
-                            Name = "Books"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            IsDeleted = false,
-                            Name = "Clothes"
-                        });
                 });
 
             modelBuilder.Entity("ecommarce.DAL.models.Order", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -353,17 +336,18 @@ namespace ecommarnce_api_CRUD_project.Migrations
 
             modelBuilder.Entity("ecommarce.DAL.models.OrderItem", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -383,11 +367,12 @@ namespace ecommarnce_api_CRUD_project.Migrations
 
             modelBuilder.Entity("ecommarce.DAL.models.Product", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -405,64 +390,6 @@ namespace ecommarnce_api_CRUD_project.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            Name = "Laptop",
-                            Price = 15000m,
-                            Stock = 10
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 1,
-                            Name = "Smartphone",
-                            Price = 8000m,
-                            Stock = 20
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 1,
-                            Name = "Headphones",
-                            Price = 500m,
-                            Stock = 30
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 2,
-                            Name = "C# Programming Book",
-                            Price = 300m,
-                            Stock = 40
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryId = 2,
-                            Name = "Database Design Book",
-                            Price = 250m,
-                            Stock = 35
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoryId = 3,
-                            Name = "T-Shirt",
-                            Price = 150m,
-                            Stock = 50
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoryId = 3,
-                            Name = "Jeans",
-                            Price = 400m,
-                            Stock = 25
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

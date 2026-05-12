@@ -57,7 +57,7 @@ namespace ecommarnce_api_CRUD_project.Controllers.Cart
         }
         [HttpDelete("{productId}")]
         [Authorize(Roles = "User,Admin")]
-        public async Task<IActionResult> RemoveFromCart(int productId)
+        public async Task<IActionResult> RemoveFromCart(Guid productId)
         {
             var userId = GetUserId();
 

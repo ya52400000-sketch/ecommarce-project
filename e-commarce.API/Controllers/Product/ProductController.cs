@@ -29,7 +29,7 @@ public class ProductController : ControllerBase
 
     [HttpGet("{id}")]
     [Authorize(Roles = "Admin,User")]
-    public async Task <IActionResult> GetById(int id)
+    public async Task <IActionResult> GetById(Guid id)
     {
         var result = await _productService.GetById(id);
 
@@ -66,7 +66,7 @@ public class ProductController : ControllerBase
 
     [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")]
-    public async Task <IActionResult> Delete(int id)
+    public async Task <IActionResult> Delete(Guid id)
     {
         try
         {

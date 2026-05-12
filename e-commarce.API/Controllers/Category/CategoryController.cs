@@ -32,7 +32,7 @@ namespace ecommarne.API.Controllers.Category
         }
         [HttpGet("{id}")]
         [Authorize(Roles = "Admin,User")]
-        public async Task<ActionResult<CategoryGetDto>> GetAction(int id)
+        public async Task<ActionResult<CategoryGetDto>> GetAction(Guid id)
         {
             var category = await _services.GetAsync(id);
 
@@ -45,7 +45,7 @@ namespace ecommarne.API.Controllers.Category
         }
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> delete(int id) 
+        public async Task<IActionResult> delete(Guid id) 
         {
             var category= await _services.GetAsync(id);
             if (category == null) {

@@ -27,7 +27,7 @@ public class OrderRepo : GenricRepo<Order>,IOrderReop
     }
 
 
-    public async Task<Order> GetOrderWithItemsAsync(int id)
+    public async Task<Order> GetOrderWithItemsAsync(Guid id)
     {
         return await _context.Orders.Include(o => o.OrderItems).ThenInclude(o => o.product) .FirstOrDefaultAsync(o => o.Id == id);
     }

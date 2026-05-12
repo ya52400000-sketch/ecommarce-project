@@ -32,6 +32,7 @@ public class CartServices : ICartServices
                 };
 
                 await _cartRepo.AddAsync(cart);
+                await _cartRepo.SaveChangesAsync();
             }
 
             var item = cart.Items.FirstOrDefault(i => i.ProductId == dto.ProductId);
@@ -57,6 +58,7 @@ public class CartServices : ICartServices
     public async Task ClearCartAsync(string userId)
     {
         await _cartRepo.ClearCartAsync(userId);
+        await _cartRepo.SaveChangesAsync();
     }
 
     public async Task<GetCartDto> GetCartAsync(string userId)
@@ -79,7 +81,7 @@ public class CartServices : ICartServices
         };
     }
 
-    public async Task RemoveFromCartAsync(string userId, int productId)
+    public async Task RemoveFromCartAsync(string userId, Guid productId)
     {
         var cart = await _cartRepo.GetCartWithItemsAsync(userId);
 
@@ -96,7 +98,7 @@ public class CartServices : ICartServices
         await _cartRepo.SaveChangesAsync();
     }
 
-    public async Task UpdateCartItemAsync(string userId, int productId, int quantity)
+    public async Task UpdateCartItemAsync(string userId, Guid productId, int quantity)
     {
         var cart = await _cartRepo.GetCartWithItemsAsync(userId);
 

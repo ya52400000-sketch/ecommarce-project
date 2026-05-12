@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\e-commarce.BLL\ecommarce.BLL.csproj" />
+    <ProjectReference Include="..\e-commarce.BLL\E-commarce.BLL.csproj" />
   </ItemGroup>
 
 </Project>

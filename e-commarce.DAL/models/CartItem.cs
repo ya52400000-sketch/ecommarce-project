@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ecommarce.DAL.models;
 
-public class CartItem:BaseType<int>
+public class CartItem:BaseType<Guid>
 {
-    public int CartId { get; set; }
+    public Guid CartId { get; set; }
     public Cart Cart { get; set; }
 
-    public int ProductId { get; set; }
+    public Guid ProductId { get; set; }
 
     public Product product { get; set; }
 

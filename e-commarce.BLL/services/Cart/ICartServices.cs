@@ -13,9 +13,9 @@ public interface ICartServices
 
     Task AddToCartAsync(string userId, AddtoCartDto dto);
 
-    Task UpdateCartItemAsync(string userId, int productId, int quantity);
+    Task UpdateCartItemAsync(string userId, Guid productId, int quantity);
 
-    Task RemoveFromCartAsync(string userId, int productId);
+    Task RemoveFromCartAsync(string userId, Guid productId);
 
     Task ClearCartAsync(string userId);
 }

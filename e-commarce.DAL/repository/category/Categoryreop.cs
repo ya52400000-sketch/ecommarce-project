@@ -14,7 +14,7 @@ public class CategoryRepo : GenricRepo<Category>, ICategoryreop
         _context = context;
     }
 
-    public async Task SoftDeleteAsync(int id)
+    public async Task SoftDeleteAsync(Guid id)
     {
         var category = await _context.Categories.FindAsync(id);
 

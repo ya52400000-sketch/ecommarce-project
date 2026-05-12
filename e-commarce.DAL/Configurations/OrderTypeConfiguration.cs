@@ -11,7 +11,7 @@ public class OrderTypeConfiguration : IEntityTypeConfiguration<Order>
     public void Configure(EntityTypeBuilder<Order> Modelbuilder)
     {
         Modelbuilder.HasKey(o => o.Id);
-        Modelbuilder.Property(o=>o.Id).ValueGeneratedNever();
+
         Modelbuilder.HasMany(o => o.OrderItems)
     .WithOne(oi => oi.Order)
     .HasForeignKey(oi => oi.OrderId);

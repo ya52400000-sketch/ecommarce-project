@@ -42,14 +42,14 @@ namespace ecommarnce_api_CRUD_project.Controllers.Order
         }
         [HttpGet("{orderId}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetById(int orderId)
+        public async Task<IActionResult> GetById(Guid orderId)
         {
             var result = await _orderService.GetOrderAsync(orderId);
             return Ok(result);
         }
         [HttpPost("{orderId}/cancel")]
         [Authorize(Roles = "User")]
-        public async Task<IActionResult> Cancel(int orderId)
+        public async Task<IActionResult> Cancel(Guid orderId)
         {
             var userId = GetUserId();
 
@@ -63,7 +63,7 @@ namespace ecommarnce_api_CRUD_project.Controllers.Order
         [HttpPut("{orderId}/status")]
         [Authorize(Roles = "Admin,User")]
 
-        public async Task<IActionResult> ChangeStatus(int orderId, [FromBody] OrderStatus status)
+        public async Task<IActionResult> ChangeStatus(Guid orderId, [FromBody] OrderStatus status)
         {
             await _orderService.ChangeOrderStatusAsync(orderId, status);
 
