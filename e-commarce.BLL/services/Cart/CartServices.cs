@@ -14,47 +14,62 @@ namespace ecommarce.BLL.services;
 public class CartServices : ICartServices
 {
     private readonly ICartRepo _cartRepo;
-    public CartServices(ICartRepo cartRepo)
+    private readonly IProductRepo _productRepo;
+    public CartServices(ICartRepo cartRepo, IProductRepo productRepo)
     {
         _cartRepo = cartRepo;
+        _productRepo = productRepo;
     }
     public async Task AddToCartAsync(string userId, AddtoCartDto dto)
     {
+
+        var product = await _productRepo.GetByIdAsync(dto.ProductId);
+        if (product == null)
         {
-            var cart = await _cartRepo.GetCartWithItemsAsync(userId);
-
-            if (cart == null)
-            {
-                cart = new Cart
-                {
-                    UserId = userId,
-                    Items = new List<CartItem>()
-                };
-
-                await _cartRepo.AddAsync(cart);
-                await _cartRepo.SaveChangesAsync();
-            }
-
-            var item = cart.Items.FirstOrDefault(i => i.ProductId == dto.ProductId);
-
-            if (item != null)
-            {
-                item.Quantity += dto.Quantity;
-            }
-            else
-            {
-                cart.Items.Add(new CartItem
-                {
-                    ProductId = dto.ProductId,
-                    Quantity = dto.Quantity,
-                    Price = dto.Price
-                });
-            }
-
-            await _cartRepo.SaveChangesAsync();
+            throw new Exception("Product not found");
         }
-    }
 
+      
+        var cart = await _cartRepo.GetCartWithItemsAsync(userId);
+
+ 
+        if (cart == null)
+        {
+            cart = new Cart
+            {
+                UserId = userId,
+                Items = new List<CartItem>()
+            };
+            await _cartRepo.AddAsync(cart);
+            await _cartRepo.SaveChangesAsync();
+
+        }
+
+ 
+        var existingItem = cart.Items.FirstOrDefault(i => i.ProductId == dto.ProductId);
+
+        if (existingItem != null)
+        {
+    
+            existingItem.Quantity += dto.Quantity;
+    
+            existingItem.Price = product.Price;
+        }
+        else
+        {
+      
+            cart.Items.Add(new CartItem
+            {
+                ProductId = dto.ProductId,
+                ProductName = product.Name,
+                Quantity = dto.Quantity,
+                Price = product.Price 
+            });
+        }
+
+ 
+        await _cartRepo.SaveChangesAsync();
+    }
     public async Task ClearCartAsync(string userId)
     {
         await _cartRepo.ClearCartAsync(userId);

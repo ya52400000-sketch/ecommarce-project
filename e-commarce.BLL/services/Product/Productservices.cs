@@ -48,7 +48,7 @@ public class Productservices : IProductservices
    
     public async Task <IEnumerable<ProductGetallDto>> Getall()
     {
-        var products = await _repo.GetAllAsync();
+        var products = await _repo.GetallproductsAsync(new Product());
 
         return products.Select(p => new ProductGetallDto
         {
@@ -63,7 +63,7 @@ public class Productservices : IProductservices
 
     public async Task<ProductGetByIdDto> GetById(Guid id)
     {
-        var p = await _repo.GetByIdAsync(id);
+        var p = await _repo.GetProductAsync(id);
 
         if (p == null)
             return null;

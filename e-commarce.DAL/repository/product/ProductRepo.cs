@@ -12,5 +12,14 @@ public class ProductRepo : GenricRepo<Product>,IProductRepo
     {
         _context = context;
     }
-  
+
+    public async Task<IEnumerable<Product>> GetallproductsAsync(Product product)
+    {
+   return await _context.Products.Include(p => p.Category).ToListAsync();
+    }
+
+    public Task<Product> GetProductAsync(Guid id)
+    {
+       return _context.Products.Include(p => p.Category).FirstOrDefaultAsync(p => p.Id == id);
+    }
 }

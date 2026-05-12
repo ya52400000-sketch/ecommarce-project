@@ -5,5 +5,7 @@ namespace ecommarce.DAL.repository;
 
 public interface IProductRepo:IGenricRepo<Product>
 {
- 
+    Task <Product> GetProductAsync (Guid id);
+    Task <IEnumerable<Product>> GetallproductsAsync(Product product);
+
 }

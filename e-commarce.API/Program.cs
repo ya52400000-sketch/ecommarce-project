@@ -1,3 +1,4 @@
+using e_commarce.BLL.services;
 using ecommarce.API.Middlewares;
 using ecommarce.BLL.services;
 using ecommarce.BLL.services;
@@ -35,6 +36,9 @@ builder.Services.AddScoped<ICartItemRepo, CartItemRepo>();
 builder.Services.AddScoped<IOrderItemRepo, OrderItemRepo>();
 builder.Services.AddScoped<IAuthServices, AuthServices>();
 builder.Services.AddScoped<IRoleServices, RoleService>();
+builder.Services.AddScoped<ICartServices, CartServices>();
+builder.Services.AddScoped<IOrderServices, OrderServices>();
+
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
     options.Password.RequireUppercase=true;

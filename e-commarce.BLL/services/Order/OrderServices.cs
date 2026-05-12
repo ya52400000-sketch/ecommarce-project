@@ -68,6 +68,7 @@ public class OrderServices : IOrderServices
             OrderItems = cart.Items.Select(i => new OrderItem
             {
                 ProductId = i.ProductId,
+                ProductName = i.ProductName,
                 Quantity = i.Quantity,
                 Price = i.Price
             }).ToList()
@@ -83,13 +84,16 @@ public class OrderServices : IOrderServices
 
     public async Task<IEnumerable<GetAllOrdersDto>> GetAllOrdersAsync(FilterOrderDto filter)
     {
+        
         var query = _orderRepo.GetAllQueryable();
 
-        if (!string.IsNullOrEmpty(filter.Status))
-            query = query.Where(o => o.Status.ToString() == filter.Status);
+   
+        if (!string.IsNullOrEmpty(filter.UserName))
+        {
+  
+            query = query.Where(o => o.User.UserName.Contains(filter.UserName));
+        }
 
-        if (!string.IsNullOrEmpty(filter.UserId))
-            query = query.Where(o => o.UserId == filter.UserId);
 
         if (filter.From.HasValue)
             query = query.Where(o => o.CreatedAt >= filter.From.Value);
@@ -97,9 +101,8 @@ public class OrderServices : IOrderServices
         if (filter.To.HasValue)
             query = query.Where(o => o.CreatedAt <= filter.To.Value);
 
+
         return await query
-            .Include(o => o.OrderItems)
-            .ThenInclude(i => i.product)
             .Select(o => new GetAllOrdersDto
             {
                 Id = o.Id,
@@ -110,7 +113,6 @@ public class OrderServices : IOrderServices
             })
             .ToListAsync();
     }
-
     public async Task<GetOrderDto> GetOrderAsync(Guid orderId)
     {
         var order = await _orderRepo.GetOrderWithItemsAsync(orderId);
